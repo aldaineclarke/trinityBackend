@@ -3,7 +3,7 @@ const Plumber = require('../models/plumber.model')
 
 
 
-exports.getPlumber = async (req, res) => {
+exports.getAllPlumbers = async (req, res) => {
 	try {
 		const plumber = await Plumber.find()
         JSONResponse.success(res, 'Success.', plumber, 200)

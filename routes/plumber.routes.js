@@ -7,7 +7,7 @@ router.route('/')
 .post(plumber.createPlumber);
 
 router.route('/:id')
-.get(plumber.getplumberById)
+.get(plumber.getPlumberById)
 .patch(plumber.updatePlumber)
 .delete(plumber.deletePlumberById);
 
