@@ -1,7 +1,8 @@
-const { JSONResponse } = require("../lib/helper");
+const { JSONResponse } = require("../utilities/JSONResponse");
 const Admin = require("../models/admin.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { default: mongoose } = require("mongoose");
 
 /**
  * ### Description
@@ -9,10 +10,12 @@ const jwt = require("jsonwebtoken");
  */
 exports.createAdmin = async (req, res) => {
 	try {
+		req.body.password = await bcrypt.hash(req.body.password, 10);
 		const admin = await Admin.create(req.body);
-		JSONResponse.success(res, "Success.", admin, 200);
+		admin.password = undefined;
+		JSONResponse.success(res, "success", admin, 200);
 	} catch (error) {
-		JSONResponse.error(res, "Failure handling admin model.", error, 500);
+		JSONResponse.error(res, "error", error, 500);
 	}
 };
 
@@ -22,25 +25,22 @@ exports.adminLogin = async (req, res) => {
 			email: req.body.email,
 			username: req.body.username,
 		});
+
 		if (
 			admin &&
 			(await bcrypt.compare(req.body.password, admin.password))
 		) {
+			console.log(admin);
 			const token = jwt.sign(
-				{ email: company.email },
-				process.env.JWT_SECRET
+				{ email: admin.email },
+				process.env.JWT_SECRET_KEY
 			);
 			admin.password = undefined;
-			return JSONResponse.success(res, "Success.", { token, admin }, 200);
+			return JSONResponse.success(res, "success", { token, admin }, 200);
 		} else {
-			JSONResponse.error(
-				res,
-				"Failure handling admin model.",
-				error,
-				500
-			);
+			JSONResponse.error(res, "error", "Admin does not exist", 500);
 		}
 	} catch (error) {
-		JSONResponse.error(res, "Failure handling admin model.", error, 500);
+		JSONResponse.error(res, "error", error, 500);
 	}
 };

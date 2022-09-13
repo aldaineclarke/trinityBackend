@@ -5,3 +5,5 @@ const admin = require("../controllers/admin.controller");
 router.route("/login").post(admin.adminLogin);
 
 router.route("/register").post(admin.createAdmin);
+
+module.exports = router;

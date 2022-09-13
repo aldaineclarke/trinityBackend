@@ -1,9 +1,9 @@
 const db = require("mongoose");
 
 let adminSchema = new db.Schema({
-	email: { type: String, required },
-	username: { type: String, required },
-	password: { type: String, required },
+	email: { type: String, required: true },
+	username: { type: String, required: true },
+	password: { type: String, required: true },
 });
 
-model.exports = db.model("Admin", adminSchema);
+module.exports = db.model("Admin", adminSchema);
