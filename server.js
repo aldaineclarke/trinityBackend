@@ -5,10 +5,17 @@ const mongoose = require('mongoose');
 const PORT = parseInt(process.env.PORT) || 8000;
 const cors = require('cors');
 
+const apiRouter = require('./api/api.v1');
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
+
+
+app.use("/api/v1/", apiRouter);
 
 app.listen(PORT, (error)=>{
     if(error) throw error;
