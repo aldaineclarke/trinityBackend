@@ -16,7 +16,6 @@ app.use(cors());
 
 
 app.use("/api/v1/", apiRouter);
-app.use("/api/v1/products", require('./routes/product.routes'));
 
 app.listen(PORT, (error)=>{
     if(error) throw error;
