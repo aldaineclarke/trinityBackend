@@ -1,6 +1,6 @@
 const { JSONResponse } = require("../utilities/JSONResponse");
 const { ObjectId } = require("mongoose").Types;
-const Order = require("../models/orders.schema");
+const Order = require("../models/order.model");
 class OrderController {
 
     static getAllOrders = async (req, res)=>{

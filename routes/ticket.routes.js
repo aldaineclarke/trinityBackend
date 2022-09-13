@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllTickets, getTicketById, createTicket, editTicketById, deleteTicketById } = require('../controllers/ticketController')
+const { getAllTickets, getTicketById, createTicket, editTicketById, deleteTicketById } = require('../controllers/ticket.controller')
 
 router
   .route('/')

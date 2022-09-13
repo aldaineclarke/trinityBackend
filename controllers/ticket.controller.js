@@ -1,4 +1,4 @@
-const Ticket = require('../models/ticketModel');
+const Ticket = require('../models/ticket.model');
 const Json = require('../utilities/JSONResponse');
 let message = undefined;
 

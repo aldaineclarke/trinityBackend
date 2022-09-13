@@ -21,11 +21,11 @@ const TicketSchema = new mongoose.Schema({
     type:String
   },
 
-  plumber:[{
+  plumber:{
     type: mongoose.Schema.Types.ObjectId,
     ref:'Plumber',
     sparse:true
-  }],
+  },
 
   createdAt:{
     type: Date
@@ -34,6 +34,6 @@ const TicketSchema = new mongoose.Schema({
 
 },{collection:'tickets'})
 
-const Ticket = mongoose.model('ticket', TicketSchema);
+const Ticket = mongoose.model('Ticket', TicketSchema);
 
 module.exports = Ticket;
