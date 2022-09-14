@@ -17,7 +17,11 @@ exports.getAllProducts = async (req, res) => {
 exports.getproductById = async (req, res) => {
 	try {
 		const product = await Product.findById({_id:req.params.id})
-        JSONResponse.success(res, 'Success.', product, 200)
+		if(product){
+			JSONResponse.success(res, 'Success.', product, 200)
+		}else{
+			JSONResponse.success(res, 'Product NOT FOUND', product, 404)
+		}
 	} catch (error) {
 		JSONResponse.error(res, "Failure handling product model.", error, 500)
 	}
@@ -42,6 +46,11 @@ exports.updateProduct = async (req, res) => {
 	try {
 		const product = await Product.findByIdAndUpdate({_id:req.params.id},req.body)
 		JSONResponse.success(res, 'Success.', product, 200)
+		if(product){
+			JSONResponse.success(res, 'Success.', product, 200)
+		}else{
+			JSONResponse.success(res, 'Product NOT FOUND', product, 404)
+		}
 	} catch (error) {
 		JSONResponse.error(res, "Failure handling product model.", error, 500)
 	}
@@ -54,8 +63,12 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProductById = async (req, res) => {
 	try {
 		const product = await Product.findById(req.params.id)
-		if (product) await product.delete()
-		JSONResponse.success(res, 'Success.', product, 200)
+		if(product){
+			await product.delete()
+			JSONResponse.success(res, 'Success.', product, 200)
+		}else{
+			JSONResponse.success(res, 'Product NOT FOUND', product, 404)
+		}
 	} catch (error) {
 		JSONResponse.error(res, 'Failure handling product model.', error, 500)
 	}
