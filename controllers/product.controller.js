@@ -29,6 +29,9 @@ exports.getproductById = async (req, res) => {
  */
 exports.createProduct = async (req, res) => {
 	try {
+		if(req.file){
+			req.body.image = req.file.path
+		}
 		const product = await Product.create(req.body)
 		JSONResponse.success(res, 'Success.', product, 200)
 	} catch (error) {
