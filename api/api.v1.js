@@ -15,6 +15,6 @@ router.use("/orders", orderRouter);
 router.use("/admin", adminrouter);
 router.use('/tickets', ticketRouter);
 router.use('/categories', categoriesRouter);
-router.use('/plumber',require('../routes/plumber.routes'));
+router.use('/plumbers',require('../routes/plumber.routes'));
 
 module.exports = router;
