@@ -33,7 +33,7 @@ exports.getcategoryById = async (req, res) => {
  */
 exports.createCategory = async (req, res) => {
   try {
-    let data = req.body.data;
+    let data = req.body;
     if(Object.keys(data).length <= 0) throw new Error("There is no data passed to create the category");
 
     const category = await Category.create(data);
@@ -47,7 +47,7 @@ exports.updateCategory = async (req, res) => {
 
     let id = req.params.id;
     let data = req.body;
-    if(Object.keys(data)) throw new Error("No data was passed to update category");
+    if(Object.keys(data).length <= 0) throw new Error("No data was passed to update category");
     if(!ObjectId.isValid(id)) throw new Error("The id that is provided is not a valid database id");
 
     const category = await Category.findByIdAndUpdate(
