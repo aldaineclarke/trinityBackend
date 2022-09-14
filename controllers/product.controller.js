@@ -7,8 +7,24 @@ const Product = require('../models/product.model')
  */
 exports.getAllProducts = async (req, res) => {
 	try {
+		if(req.query.category){
+			return this.getProductsQuery(req, res);
+		}
 		const product = await Product.find()
         JSONResponse.success(res, 'Success.', product, 200)
+	} catch (error) {
+		JSONResponse.error(res, "Failure handling product model.", error, 500)
+	}
+}
+
+exports.getProductsQuery = async (req, res) => {
+	try {
+		const product = await Product.find({category: req.query.category})
+		if(product.length){
+			JSONResponse.success(res, 'Success.', product, 200)
+		}else{
+			JSONResponse.success(res, 'No product found with this query', product, 200)
+		}
 	} catch (error) {
 		JSONResponse.error(res, "Failure handling product model.", error, 500)
 	}
