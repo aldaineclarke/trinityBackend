@@ -16,5 +16,6 @@ router.use("/admin", adminrouter);
 router.use('/tickets', ticketRouter);
 router.use('/categories', categoriesRouter);
 router.use('/plumbers',require('../routes/plumber.routes'));
+router.use('/services',require('../routes/service.routes'));
 
 module.exports = router;
