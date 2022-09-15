@@ -16,8 +16,8 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'available status'],
 		enum: {
-			values: ['available ', 'not-available'],
-			message: 'plumber might be avaiable or not available',
+			values: ['available', 'not-available'],
+			message: 'plumber might be available or not-available',
 		},
     },  
 
