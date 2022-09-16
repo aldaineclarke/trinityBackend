@@ -8,7 +8,7 @@ exports.getAllTickets = async(req, res) =>{
     const tickets = await Ticket.find();
 
     if(tickets.plumber){
-      tickets = await Ticket.find().populate('plumber')
+      tickets = await Ticket.find()
     }
 
     if(tickets.length == 0){
@@ -30,7 +30,7 @@ exports.getTicketById = async(req, res) =>{
     const ticket = await Ticket.find({_id:id});
 
     if(ticket.plumber){
-      ticket = await Ticket.find({_id:id}).populate('plumber')
+      ticket = await Ticket.find({_id:id})
     }
 
     if(ticket == ''){
@@ -52,6 +52,7 @@ exports.createTicket = async(req, res) =>{
     clientPhone,
     clientAddress,
     clientNote,
+    service,
     plumber,
     createdAt
    } = req.body
@@ -62,6 +63,7 @@ exports.createTicket = async(req, res) =>{
     clientPhone: clientPhone,
     clientAddress:clientAddress,
     clientNote:clientNote,
+    service:service,
     plumber:plumber,
     createdAt:createdAt
    }
@@ -82,7 +84,7 @@ exports.editTicketById = async(req, res) =>{
     const ticket = await Ticket.find({_id:id});
 
     if(ticket.plumber){
-      ticket = await Ticket.find({_id:id}).populate('plumber')
+      ticket = await Ticket.find({_id:id})
     }
 
     if(ticket == ''){
@@ -96,6 +98,7 @@ exports.editTicketById = async(req, res) =>{
       clientPhone,
       clientAddress,
       clientNote,
+      service,
       plumber,
       createdAt
      } = req.body
@@ -106,6 +109,7 @@ exports.editTicketById = async(req, res) =>{
       clientPhone: clientPhone,
       clientAddress:clientAddress,
       clientNote:clientNote,
+      service:service,
       plumber:plumber,
       createdAt:createdAt
      }
@@ -128,7 +132,7 @@ exports.deleteTicketById = async(req, res) =>{
     const ticket = await Ticket.find({_id:id});
 
     if(ticket.plumber){
-      ticket = await Ticket.find({_id:id}).populate('plumber')
+      ticket = await Ticket.find({_id:id})
     }
 
     if(ticket == ''){
