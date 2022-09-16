@@ -20,7 +20,10 @@ const TicketSchema = new mongoose.Schema({
   clientNote:{
     type:String
   },
-
+  service:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"Service",
+  },
   plumber:{
     type: mongoose.Schema.Types.ObjectId,
     ref:'Plumber',
