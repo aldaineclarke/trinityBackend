@@ -10,7 +10,7 @@ const TicketSchema = new mongoose.Schema({
   },
 
   clientPhone:{
-    type:Number
+    type:String
   },
 
   clientAddress:{
