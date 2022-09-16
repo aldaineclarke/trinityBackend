@@ -10,7 +10,7 @@ router
 router
   .route('/:id')
   .get(getTicketById)
-  .put(editTicketById)
+  .patch(editTicketById)
   .delete(deleteTicketById)
   
 
