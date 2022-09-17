@@ -4,6 +4,6 @@ const userRouter = require("../routes/user.routes");
 
 // Lists all the resources for the restful api
 router.use("/admin", adminrouter);
-router.use("/user", userRouter);
+router.use("/users", userRouter);
 
 module.exports = router;
