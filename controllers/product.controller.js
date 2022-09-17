@@ -1,6 +1,6 @@
 const { JSONResponse } = require('../utilities/JSONResponse')
 const Product = require('../models/product.model')
-
+const fs = require('fs');
 /**
  * ### Description
  * Get all products
@@ -45,6 +45,7 @@ exports.createProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
 	try {
 		const product = await Product.findByIdAndUpdate({_id:req.params.id},req.body)
+
 		JSONResponse.success(res, 'Success.', product, 200)
 		if(product){
 			JSONResponse.success(res, 'Success.', product, 200)
@@ -62,9 +63,12 @@ exports.updateProduct = async (req, res) => {
  */
 exports.deleteProductById = async (req, res) => {
 	try {
-		const product = await Product.findById(req.params.id)
+		const product = await Product.findById(req.params.id);
+		
 		if(product){
 			await product.delete()
+			console.log(product);
+			console.log(await deleteImage(product.image));
 			JSONResponse.success(res, 'Success.', product, 200)
 		}else{
 			JSONResponse.success(res, 'Product NOT FOUND', product, 404)
@@ -72,4 +76,21 @@ exports.deleteProductById = async (req, res) => {
 	} catch (error) {
 		JSONResponse.error(res, 'Failure handling product model.', error, 500)
 	}
+
+
 }
+
+const deleteImage = (imgPath)=>{
+	console.log(imgPath)
+	return new Promise((resolve, reject)=>{
+		if (!imgPath){
+			reject("No Image was provided");
+			}
+		fs.unlink(imgPath, (error)=>{
+			if (error){
+				throw error;
+			}
+			resolve("file Deleted Successfully");
+	})
+});
+}	
